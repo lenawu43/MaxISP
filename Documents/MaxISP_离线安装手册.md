@@ -1,84 +1,24 @@
-
-
-
-
-# v2文档需求
+MaxISP安装部署文档
 
 ---
 
 ## 环境信息
 
-| 服务           | 版本                                 |
-| -------------- | ------------------------------------ |
-| centos         | CentOS Linux release 7.4.1708 (Core) |
-| mysql          | 5.7.21                               |
-| docker         | Docker version 18.03.1-ce            |
-| docker-compose | docker-compose version 1.24.0        |
+* centos  
 
----
+  CentOS Linux release 7.4.1708 (Core)
 
-## docker 离线安装
+* mysql
 
-* 解压docker安装包
+  5.7.21
 
-   unzip -n  docker.zip
+* docker
 
-* 安装相关rpm包
+  Docker version 18.03.1-ce
 
-  ```sh
-  yum -y install   containerd.io-1.2.5-3.1.el7.x86_64.rpm
-  yum -y install   docker-ce-selinux-17.03.3.ce-1.el7.noarch.rpm
-  yum -y install   docker-ce-cli-18.09.4-3.el7.x86_64.rpm
-  yum -y install   docker-ce-18.09.4-3.el7.x86_64.rpm
-  ```
+* docker-compose
 
-* 启动docker
-
-  ```sh
-  systemctl start docker
-  ```
-
-* 确认是否安装成功
-
-  ```sh
-  docker run hello-world
-  ```
-
----
-
-## MYSQL安装
-
-* 导入mysql镜像
-
-  ```sh
-  docker load -i mysql.tar
-  ```
-
-* 修改mysql目录的docker-compose.yml参数设置mysql密码
-
-  ```yml
-  version: '3'
-  services:
-  
-    mysql:
-      container_name: mysql
-      restart: always
-      image: mysql:5.7   #根据导入镜像修改镜像名
-      ports:
-      - "3306:3306"
-      environment:
-        MYSQL_ROOT_PASSWORD: password  #修改密码
-      volumes:
-      - ./mysql/conf:/etc/mysql/mysql.conf.d
-      - ./mysql/data:/usr/local/mysql/data
-      - ./mysql/logs/:/usr/local/mysql/logs
-  ```
-
-* 启动mysql服务
-
-  ```sh
-  docker-compose up -d
-  ```
+  docker-compose version 1.24.0
 
 ---
 
@@ -86,15 +26,11 @@
 
 * 直接修改版本安装
 
-  ```sh
   sudo curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-uname -s-uname -m -o /usr/local/bin/docker-compose
-  ```
 
 * 赋予权限
 
-  ```sh
   sudo chmod +x /usr/local/bin/docker-compose
-  ```
 
 ---
 
@@ -216,25 +152,21 @@ services:
 
 * 启动容器
 
-  1. 导入镜像
+  1. 进入docker-compose.yml所在目录
 
-     docker load -i portalv2.tar
+     cd portal-admin-v2 
 
-  2. 进入docker-compose.yml所在目录(有三个目录，这里例1)
+  2. 启动容器
 
-  ​       cd portal-admin-v2 
+     docker-compose up （看是否报错，如果没报错，进行下一步）
 
-  ​       启动容器
+  3. docker-compose down
 
-  ​       docker-compose up （看是否报错，如果没报错，进行下一步）
+  4. docker-compose up -d
 
-  ​       docker-compose down
+     ![1564983858042](./image/2.jpg)
 
-  ​       docker-compose up -d
-  
-  ![1564983858042](./image/2.jpg)
-  
-  如果显示up，则容器运行成功
+     如果显示up，则容器运行成功
 
 ---
 
