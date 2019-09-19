@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  web-portal-v2:
+    container_name: web-portal-v2
+    image: harborIp/maxcloud/web-portal-v2:theversion
+    privileged: true
+    ports:
+      - 707:443
+    volumes:
+      - /opt/maxcloud/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      - TZ=Asia/Shanghai
+
+
+networks:
+  default:
+    external:
+      name: maxcloud

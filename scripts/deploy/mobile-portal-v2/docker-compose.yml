@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  mobile-portal-v2  :
+    container_name:  mobile-portal-v2  
+    image: harborIp/maxcloud/mobile-portal-v2:theversion
+    privileged: true
+    ports:
+      - 708:443
+    volumes:
+      - /opt/maxcloud/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      - TZ=Asia/Shanghai
+
+networks:
+  default:
+    external:
+      name: maxcloud

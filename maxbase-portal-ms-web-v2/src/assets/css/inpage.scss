@@ -1,0 +1,73 @@
+@charset 'utf-8'; 
+@import '_constant.scss';
+.side-menu{
+  .el-scrollbar__wrap{
+    margin-right: 0 !important;
+    .element-ex-icons{
+      transition: font-size 2s;
+    }
+    .is-collapse{
+      .element-ex-icons{
+        font-size: 22px;
+      }
+    }
+  }
+}
+.inner-content {
+  .main-left{
+    .el-tree-node__content{
+      background: #efefef;
+    }
+  }
+  .main-right{
+    .el-collapse-item__header{
+      font-size: 18px;
+    }
+  }
+}
+.role-dialog, .role-user {
+  .el-dialog{
+    height: 550px;
+  }
+  .el-dialog__body{
+    padding: 0;
+    height: 420px;
+    overflow: auto;
+  }
+
+}
+.role-permision {
+  .el-table__header{
+    background: $form-bg-color;
+    th{
+      background: $form-bg-color;
+    }
+  }
+}
+
+.member-dialog .el-dialog__body{
+  padding-top: 0;
+}
+
+
+.role-info{
+  .el-form-item__label, .el-input__inner, .el-switch__label *{
+    font-size: 12px;
+  }
+  .el-input__inner{
+    border-color: $form-bg-color;
+    background-color: #f2f2f2;
+  }
+}
+.product-panel{
+  .bottom-content{
+    .el-row{
+      padding: 3px 10px;
+      .el-col{
+        height: 200px;
+        padding: 10px;
+        padding-right: 40px;
+      }
+    }
+  }
+}

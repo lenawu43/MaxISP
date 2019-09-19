@@ -1,0 +1,116 @@
+spring:
+  application:
+    name: maxbase-portal-admin-v2
+  redis:
+    host: ${REDIS_HOST:rdserver}
+    port: ${REDIS_PORT:6379}
+    cache:
+      expires:
+        MAXBASE:STORAGE:ALL_APPLICATION_ACCOUNTS: 300 # key: MAXBASE:STORAGE:ALL_APPLICATION_ACCOUNTS, value: 300s
+  http:
+    multipart:
+      enabled: true
+      max-request-size: ${UPLOAD_MAX_REQUEST_SIZE:100MB} # 鎬讳笂浼犵殑鏁版嵁澶у皬
+      max-file-size: ${UPLOAD_MAX_FILE_SIZE:20MB} # 鍗曚釜鏂囦欢澶у皬
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+   # default-property-inclusion: non_null
+  datasource:
+    url: jdbc:mysql://${MASTER_MYSQL_HOST:dbserver}:${MASTER_MYSQL_PORT:3306}/portal_admin_v2?useUnicode=true&characterEncoding=UTF8
+    username: ${MASTER_MYSQL_USERNAME:xxxx}
+    password: ${MASTER_MYSQL_PASSWORD:yyyyyy}
+    sql-script-encoding: utf-8
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    initialize: ${DB_AUTO_INIT:false}
+    name: portal-admin-v2
+    druid:
+      # 配置初始化大小、最小、最大
+      initialSize: 4
+      minIdle: 4
+      maxActive: 201
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      testWhileIdle: true
+      # 这里建议配置为TRUE，防止取到的连接不可用
+      testOnBorrow: true
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+      # 默认提交方式。默认true
+      defaultAutoCommit: true
+      # 验证连接有效与否的SQL，不同的数据配置不同
+      validationQuery: select 2 # 无效
+      filters: stat,wall,log4j
+    schema:
+      - classpath:script/schema-mysql.sql
+      - classpath:script/portal-admin.sql
+
+storage: 
+  context-path: http://${STORAGE_CONTEXT_PATH:xx.xx.xx.xx:10010/}
+  file-download-path: ${FILE_DOWN_LOAD_PATH:storage/download/}
+  file-upload-path: ${FILE_UP_LOAD_PATH:storage/upload}
+  assignation-root-path: ${FILE_ASSIGNATION_PATH:/storage/assignation/upload/}
+  random-root-path: ${FILE_RANDOM_PATH:/storage/random/upload/}
+server: 
+  port: 10019 # port请参照《基于Kubernetes平台的端口规范收集表.xlsx》
+  context-path: /portal-v2
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${IP_ADDRESS:localhost}:${server.port}
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 30
+    ip-address: ${IP_ADDRESS:localhost}
+  client:
+    service-url:
+      defaultZone: http://deep:123@${EUREKA_HOST:register-server}:${EUREKA_PORT:8761}/eureka/
+    registry-fetch-interval-seconds: 30 #task supervisor timed out
+    refresh: 
+      interval: 30
+
+
+management:
+  security:
+    enabled: false
+
+
+# 配置数据库
+mybatis:
+  mapper-locations: "classpath*:mapper/*.xml"
+  configuration:
+    lazy-loading-enabled: true
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+auth:
+  client:
+    enabled: true
+    user-token-header: Authorization
+    user-signing-key: sss
+    client-public-key-expire-time : ${REDIS_KEY_EXPIRE:5} # 鍗曚綅涓猴細鍒嗛挓
+    client-address: ${CLIENT_ADDRESS:} #127.0.0.1:8083
+
+# swagger 配置
+swagger:
+    enabled: true
+    base-package: com.maxnerva.cloud.portal.admin
+    title: ${spring.application.name}
+    version: 1.0.0
+    contact:
+        name: admin
+    global-operation-parameters:
+      - name: Authorization
+        parameter-type: header
+        model-ref: string
+      - name: Application-Code
+        parameter-type: header
+        model-ref: string

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxnerva.cloud.portal.admin.dao.mapper.ApplicationGroupItemMapper">
+	
+	<update id="updateOldDataOrderNoTargetUp" parameterType="int">
+		update application_group_item t 
+		set t.order_no =t.order_no +1 
+		where t.order_no  <![CDATA[  >= ]]> #{newOrderNo} 
+			and t.order_no  <![CDATA[ <  ]]> #{orgOrderNo}
+			and t.web_navigation_id=#{mobileNavigationId}
+			
+	</update>
+	<update id="updateOldDataOrderNoTargetDown" parameterType="int">
+		update application_group_item t
+		 set t.order_no =t.order_no -1 
+		 where t.order_no  <![CDATA[ >  ]]> #{orgOrderNo} 
+		 and t.order_no  <![CDATA[ <= ]]> #{newOrderNo} 
+		 and t.web_navigation_id=#{mobileNavigationId}
+		 
+	</update>
+	
+</mapper>

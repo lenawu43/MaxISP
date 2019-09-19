@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxnerva.cloud.portal.admin.dao.mapper.BusinessTypeMapper">
+	<resultMap id="baseMap" type="com.maxnerva.cloud.portal.admin.dao.entity.BusinessTypeEntity">
+		<id  column="id" property="id"></id>
+		<result column="business_type_name" property="businessTypeName"></result>
+		<result column="platform" property="platform"></result>
+		<result column="order_no" property="order"></result>
+		<result column="created_date" property="createdDate"></result>
+		<result column="created_by" property="createdBy"></result>
+		<result column="last_modified_by" property="lastModifiedBy"></result>
+		<result column="last_modified_date" property="lastModifiedDate"></result>
+	</resultMap>
+
+	<delete id="deleteAllData">
+		delete from business_type
+	</delete>
+
+	<select id="getBusinessTypeListByPlatform" parameterType="String" resultMap="baseMap" >
+		select a.* FROM  business_type a WHERE
+
+		<if test="platform != null" >
+			a.platform = '${platform}'
+		</if>
+
+		<if test = "1==1" >
+			ORDER BY a.order_no, a.last_modified_date desc
+		</if>
+
+	</select>
+
+
+	<select id="checkUniqueByName" parameterType="String" resultType="java.lang.Integer" >
+		select count(*) FROM  business_type a WHERE
+
+		<if test="businessTypeName != null" >
+			a.business_type_name = '${businessTypeName}'
+		</if>
+
+		<if test="platform != null" >
+			and a.platform = '${platform}'
+		</if>
+
+	</select>
+
+	<select id="uniqueEdit" parameterType="com.maxnerva.cloud.portal.admin.dao.entity.BusinessTypeEntity" resultType="java.lang.Integer">
+		SELECT
+		count( id )
+		FROM
+		business_type
+		WHERE
+		1=1
+		AND id = #{id}
+		AND EXISTS ( SELECT 1 FROM business_type WHERE 1=1
+		<if test="businessTypeName != '' and  businessTypeName != null ">
+			and business_type_Name = #{businessTypeName}
+		</if>
+		<if test="platform != '' and  platform != null ">
+			and platform = #{platform}
+		</if>
+		AND id != #{id} )
+	</select>
+
+</mapper>

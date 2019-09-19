@@ -1,0 +1,1 @@
+export default {"profile":"dev","gateway-server":"msportalgatewayserver","web-server":"msportal.iisd.mts.com","api-server":"msportalapiserver","domain-name":"","Application-Code":"Maxbase","username":"","password":"","img_assignation_url":"801/assignation/","img_random_url":"801/random/"}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxnerva.cloud.portal.admin.dao.mapper.MobileNavigationMapper">
+	
+	<update id="updateOldDataOrderNoTargetUp" parameterType="int">
+		update mobile_navigation t 
+		set t.order_no =t.order_no +1 
+		where t.order_no  <![CDATA[  >= ]]> #{newOrderNo} 
+			and t.order_no  <![CDATA[ <  ]]> #{orgOrderNo}
+			and t.business_type_id=#{businessTypeId}
+			
+	</update>
+	<update id="updateOldDataOrderNoTargetDown" parameterType="int">
+		update mobile_navigation t
+		 set t.order_no =t.order_no -1 
+		 where t.order_no  <![CDATA[ >  ]]> #{orgOrderNo} 
+		 and t.order_no  <![CDATA[ <= ]]> #{newOrderNo} 
+		 and t.business_type_id=#{businessTypeId}
+		
+	</update>
+	
+	<!-- uniqueEdit -->
+	<select id="uniqueEdit" parameterType="com.maxnerva.cloud.portal.admin.dao.entity.MobileNavigationEntity" resultType="int">
+		SELECT
+			count( id ) 
+		FROM
+			mobile_navigation 
+		WHERE
+			1=1 
+			AND id = #{id} 
+			AND EXISTS ( SELECT 1 FROM mobile_navigation WHERE 1=1
+				<if test="applicationCode != '' and  applicationCode !=null ">
+					and application_code = #{applicationCode}
+				</if>
+				<if test="mobileNavigationCode != '' and mobileNavigationCode != null">
+					and mobile_navigation_code = #{mobileNavigationCode}
+				</if>
+				
+				AND id != #{id} )
+	</select>
+	
+	
+</mapper>

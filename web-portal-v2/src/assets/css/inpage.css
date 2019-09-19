@@ -1,0 +1,60 @@
+.side-menu .el-scrollbar__wrap {
+  margin-right: 0 !important;
+}
+
+.side-menu .el-scrollbar__wrap .element-ex-icons {
+  transition: font-size 2s;
+}
+
+.side-menu .el-scrollbar__wrap .is-collapse .element-ex-icons {
+  font-size: 22px;
+}
+
+.inner-content .main-left .el-tree-node__content {
+  background: #efefef;
+}
+
+.inner-content .main-right .el-collapse-item__header {
+  font-size: 18px;
+}
+
+.role-dialog .el-dialog, .role-user .el-dialog {
+  height: 550px;
+}
+
+.role-dialog .el-dialog__body, .role-user .el-dialog__body {
+  padding: 0;
+  height: 420px;
+  overflow: auto;
+}
+
+.role-permision .el-table__header {
+  background: #f4f4f2;
+}
+
+.role-permision .el-table__header th {
+  background: #f4f4f2;
+}
+
+.member-dialog .el-dialog__body {
+  padding-top: 0;
+}
+
+.role-info .el-form-item__label, .role-info .el-input__inner, .role-info .el-switch__label * {
+  font-size: 12px;
+}
+
+.role-info .el-input__inner {
+  border-color: #f4f4f2;
+  background-color: #f2f2f2;
+}
+
+.product-panel .bottom-content .el-row {
+  padding: 3px 10px;
+}
+
+.product-panel .bottom-content .el-row .el-col {
+  height: 200px;
+  padding: 10px;
+  padding-right: 40px;
+}
