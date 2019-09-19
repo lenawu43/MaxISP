@@ -5,7 +5,7 @@ MaxISP(Maxnerva Internet Service Protal)作为一款轻量型工具，能帮助�
 
 ## 快速索引
 
-[使用手册](Documents/MaxISP在线帮助使用文档.md)
+[使用手册](Documents/MaxISP_在线帮助文档.pdf)
 [安装文档](Documents/MaxISP_离线安装手册.md)
 
 
