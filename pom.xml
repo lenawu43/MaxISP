@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.maxnerva.cloud</groupId>
+    <artifactId>maxbase-portal-v2</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>maxbase-portal-admin-v2</module>
+    </modules>
+    
+    <parent>
+        <groupId>io.spring.platform</groupId>
+        <artifactId>platform-bom</artifactId>
+        <version>Brussels-SR3</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Dalston.SR5</spring-cloud.version>
+
+        <spring-boot.version>1.5.4.RELEASE</spring-boot.version>
+        <spring-jdbc.version>4.3.9.RELEASE</spring-jdbc.version>
+
+        <maxbase-portal-admin-v2.version>1.0.0</maxbase-portal-admin-v2.version>
+        <maxbase-common-base.version>3.2.0</maxbase-common-base.version>
+        <!--<maxbase-common-db.version>1.0.0</maxbase-common-db.version>-->
+        <maxbase-common-cache.version>2.0.0</maxbase-common-cache.version>
+        <maxbase-common-mq.version>2.0.0</maxbase-common-mq.version>
+
+        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+        <druid.version>1.1.10</druid.version>
+        <mybatis.version>2.0.0</mybatis.version>
+        <tk.mybatis.version>2.0.3</tk.mybatis.version>
+        <pagehelper.version>1.1.2</pagehelper.version>
+
+        <spring-rabbit.version>1.7.3.RELEASE</spring-rabbit.version>
+
+        <xxl-job-core.version>2.0.1</xxl-job-core.version>
+        <apollo.version>1.4.0</apollo.version>
+
+        <fastjson.version>1.2.33</fastjson.version>
+
+        <spring4all.version>1.5.1.RELEASE</spring4all.version>
+        <lombok.version>1.16.16</lombok.version>
+        <maxbase.dict.version>1.9.1</maxbase.dict.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.maxnerva.cloud</groupId>
+                <artifactId>maxbase-common-base</artifactId>
+                <version>${maxbase-common-base.version}</version>
+            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>com.maxnerva.cloud</groupId>-->
+                <!--<artifactId>maxbase-common-db</artifactId>-->
+                <!--<version>${maxbase-common-db.version}</version>-->
+            <!--</dependency>-->
+
+            <dependency>
+                <groupId>com.maxnerva.cloud</groupId>
+                <artifactId>maxbase-common-cache</artifactId>
+                <version>${maxbase-common-cache.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.maxnerva.cloud</groupId>
+                <artifactId>maxbase-common-mq</artifactId>
+                <version>${maxbase-common-mq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${tk.mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-core</artifactId>
+                <version>${apollo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>${spring-rabbit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.spring4all</groupId>
+                <artifactId>spring-boot-starter-swagger</artifactId>
+                <version>${spring4all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+			<dependency>
+	         	<groupId>com.maxnerva.cloud</groupId>
+	            <artifactId>maxbase-dict-client</artifactId>
+	        	<version>${maxbase.dict.version}</version>
+         	</dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>maven_nexus_163</id>
+            <name>maven_nexus_163</name>
+            <layout>default</layout>
+            <url>http://nexus-server:8081/nexus/content/repositories/releases/</url>
+            <!--injected in hosts : 172.16.33.163 or 10.60.136.163-->
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://nexus-server:8081/nexus/content/repositories/releases/</url>
+            <!--injected in hosts : 172.16.33.163 or 10.60.136.163-->
+        </repository>
+    </distributionManagement>
+
+</project>
